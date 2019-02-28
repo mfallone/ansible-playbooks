@@ -1,0 +1,33 @@
+---
+# Connect to the remote host and create a new user
+- name: Connect to server as setup_user and create a new user
+  user:
+    name: "{{ ansible_new_user }}"
+    password: "{{ ansible_new_user_password }}"
+    uid: "{{ ansible_new_uid }}"
+    group: "{{ ansible_new_user_group }}"
+    create_home: "{{ ansible_new_user_create_home | default(yes) }}"
+    update_password: "{{ ansible_new_user_update_password_policy | default(always) }}"
+
+- name: Add user to sudoers.d
+  lineinfile:
+    path: "/etc/sudoers.d/{{ ansible_new_user }}"
+    line: "{{ ansible_new_user }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    mode: 0440
+    create: yes
+    validate: "visudo -cf %s"
+
+- name: Set includedir in sudoers file
+  lineinfile:
+    path: /etc/sudoers
+    line: "#includedir /etc/sudoers.d"
+    state: present
+    validate: "visudo -cf %s"
+
+- name: Add ssh key to authorized_keys file
+  authorized_key:
+    user: "{{ ansible_new_user }}"
+    state: present
+    key: "{{ lookup('file', './.ssh/ansible_id_ecdsa.pub') }}"
+
