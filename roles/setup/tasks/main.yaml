@@ -1,4 +1,8 @@
 ---
+# file: roles/setup/tasks/main.yaml
+  
+- include: create-group.yaml
+
 # Connect to the remote host and create a new user
 - name: Connect to server as setup_user and create a new user
   user:
@@ -6,8 +10,8 @@
     password: "{{ ansible_new_user_password }}"
     uid: "{{ ansible_new_uid }}"
     group: "{{ ansible_new_user_group }}"
-    create_home: "{{ ansible_new_user_create_home | default(yes) }}"
-    update_password: "{{ ansible_new_user_update_password_policy | default(always) }}"
+    create_home: "{{ ansible_new_user_create_home | default('yes') }}"
+    update_password: "{{ ansible_new_user_update_password_policy | default('always') }}"
 
 - name: Add user to sudoers.d
   lineinfile:
