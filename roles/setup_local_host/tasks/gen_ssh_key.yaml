@@ -1,0 +1,12 @@
+---
+# file: roles/setup_local_host/tasks/gen_ssh_key.yaml
+- name: Generate ssh key dir (local)
+  file:
+    path: "{{ base_path }}/.ssh"
+    state: directory
+    mode: 0700
+
+- name: Generate ssh key
+  command: ssh-keygen -q -t ecdsa -b 521 -f {{ base_path }}/.ssh/ansible_id_ecdsa -C "" -N ""
+  args:
+    creates:  "{{ base_path }}/.ssh/ansible_id_ecdsa"

@@ -1,0 +1,6 @@
+---
+# file: roles/setup_local_host/tasks/clone_git_playbooks.yaml
+- name: Clone git repository - telegraf
+  git:
+    repo: 'https://github.com/rossmcdonald/telegraf.git'
+    dest: './roles/telegraf'
