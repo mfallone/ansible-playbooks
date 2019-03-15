@@ -1,0 +1,20 @@
+---
+# file: roles/kubernetes/tasks/debian-ubuntu-install-packages.yaml
+- name: Apt install base packages
+  apt:
+    name: apt-transport-https,curl
+
+- name: Add kubernetes apt-key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add kubernetes apt-repository
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: kubernetes
+
+- name: Apt install kubernetes 
+  apt:
+    name: kubelet,kubeadm,kubectl

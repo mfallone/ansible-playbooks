@@ -1,0 +1,7 @@
+---
+# file: 00-setup-kubernetes.yaml
+- hosts: test_server
+  become: true
+  roles:
+    - docker
+    - kubernetes

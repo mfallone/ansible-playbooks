@@ -1,0 +1,6 @@
+---
+# file: 00-setup-docker.yaml
+- hosts: test_server
+  become: true
+  roles:
+    - docker

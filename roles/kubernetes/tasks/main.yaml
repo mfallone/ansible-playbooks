@@ -1,0 +1,4 @@
+---
+# file: roles/kubernetes/tasks/main.yaml
+- include: apt-upgrade-packages.yaml
+- include: debian-ubuntu-install-packages.yaml

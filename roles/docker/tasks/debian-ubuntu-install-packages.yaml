@@ -1,0 +1,21 @@
+---
+# file: roles/docker/tasks/debian-ubuntu-install-packages.yaml
+- name: Apt install base packages
+  apt:
+    name: apt-transport-https,curl,ca-certificates,gnupg2,software-properties-common
+
+- name: Add docker apt-key
+  apt_key:
+    id: 0EBFCD88
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add docker apt-repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable
+    state: present
+    filename: docker
+
+- name: Apt install docker and container.io
+  apt:
+    name: docker-ce,docker-ce-cli,containerd.io

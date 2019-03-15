@@ -1,0 +1,5 @@
+---
+# file: roles/kubernetes/tasks/apt-upgrade-packages.yaml
+- name: Apt upgrade packages
+  apt:
+    upgrade: dist
