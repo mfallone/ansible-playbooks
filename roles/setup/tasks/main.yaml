@@ -1,6 +1,7 @@
 ---
 # file: roles/setup/tasks/main.yaml
-  
+
+- include: apt-update-upgrade.yaml
 - include: create-group.yaml
 
 # Connect to the remote host and create a new user

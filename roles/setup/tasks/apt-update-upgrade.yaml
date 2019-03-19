@@ -1,0 +1,5 @@
+---
+# file: roles/setup/tasks/apt-update-upgrade.yaml
+- name: APT update system
+  apt:
+    upgrade: dist
