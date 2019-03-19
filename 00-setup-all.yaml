@@ -1,4 +1,4 @@
 ---
 # file: 00-setup_all.yaml
-- import_playbook: 10-setup-ansible-local-host.yaml
-- import_playbook: 10-setup-network-hosts.yaml
+- import_playbook: 01-setup-ansible-local-host.yaml
+- import_playbook: 01-setup-network-hosts.yaml
